@@ -44,24 +44,3 @@ class BaseScreen:
 
                 # Call the manage_event method
                 self.manage_event(event)
-
-    @property
-    def rect(self):
-        """Useful property to check for boundaries and dimensions"""
-
-        return self.window.get_rect()
-
-    def draw(self):
-        """Child classes should override this method"""
-
-        print("You should override the DRAW method in your class...")
-
-    def update(self):
-        """Child classes should override this method"""
-
-        print("You should override the UPDATE method in your class...")
-
-    def manage_event(self, event):
-        """Child classes should override this method"""
-
-        print("You should override the MANAGE_EVENT method in your class...")

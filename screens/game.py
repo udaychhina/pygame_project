@@ -3,6 +3,7 @@ import pygame
 from .base_screen import BaseScreen
 
 from components.player import Player
+from components.barrel import Barrel
 from components.text_box import TextBox
 
 
@@ -12,15 +13,18 @@ class GameScreen(BaseScreen):
 
         # Create the paddle
         self.player = Player()
+        self.barrel = Barrel()
+        self.player.x = 100
 
+        self.character = pygame.sprite.GroupSingle()
+        self.character.add(self.player)
 
         self.sprites = pygame.sprite.Group()
-        self.sprites.add(self.player)
+        self.sprites.add(self.barrel)
         # self.sprites.add(self.ball)
 
     def update(self):
-        self.sprites.draw(self.window)
-        self.player.update()
+        self.character.update()
 
 
     def draw(self):
@@ -31,6 +35,7 @@ class GameScreen(BaseScreen):
         self.window.blit(self.sky, (0, 0))
         self.window.blit(self.ground, (0, self.sky.get_height()))
 
+        self.character.draw(self.window)
         self.sprites.draw(self.window)
 
     def manage_event(self, event):
@@ -39,5 +44,5 @@ class GameScreen(BaseScreen):
                 self.next_screen = "welcome"
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                self.player.update()
+            if event.key == pygame.K_w:
+                self.character.update()
