@@ -1,6 +1,6 @@
 import pygame
-from screens import BaseScreen
-from components import TextBox
+from .base_screen import BaseScreen
+from components.text_box import TextBox
 
 
 class WelcomeScreen(BaseScreen):
@@ -13,7 +13,12 @@ class WelcomeScreen(BaseScreen):
         self.sprites.add(self.button)
 
     def draw(self):
-        self.window.fill((255, 255, 255))
+        self.sky = pygame.image.load("graphics/sky/sky.png").convert_alpha()
+        self.sky = pygame.transform.scale(self.sky, (1152, self.sky.get_height()*2))
+        self.ground = pygame.image.load("graphics/ground/ground.jpg").convert_alpha()
+        self.ground = pygame.transform.scale(self.ground, (self.window.get_width(), self.ground.get_height()))
+        self.window.blit(self.sky, (0, 0))
+        self.window.blit(self.ground, (0, self.sky.get_height()))
         self.button.rect.x = 200
         self.button.rect.y = 400
         self.sprites.draw(self.window)

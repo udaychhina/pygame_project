@@ -1,5 +1,7 @@
 import pygame
-from screens import WelcomeScreen, GameOverScreen, GameScreen
+from screens.welcome import WelcomeScreen
+from screens.game import GameScreen
+from screens.game_over import GameOverScreen
 
 
 class Game:
@@ -7,7 +9,7 @@ class Game:
 
     def __init__(self):
         # Creates the window
-        self.window = pygame.display.set_mode((800, 800))
+        self.window = pygame.display.set_mode((1152, 776))
 
     def run(self):
         """Main method, manages interaction between screens"""
@@ -42,5 +44,5 @@ class Game:
 
 
 if __name__ == "__main__":
-    tilebreaker = Game()
-    tilebreaker.run()
+    cyberpunk = Game()
+    cyberpunk.run()

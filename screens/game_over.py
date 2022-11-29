@@ -1,6 +1,6 @@
 import pygame
-from screens import BaseScreen
-from components import TextBox
+from .base_screen import BaseScreen
+from components.text_box import TextBox
 
 
 class GameOverScreen(BaseScreen):
