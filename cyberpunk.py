@@ -2,14 +2,14 @@ import pygame
 from screens.welcome import WelcomeScreen
 from screens.game import GameScreen
 from screens.game_over import GameOverScreen
-
+from components.util import SCREEN_SIZE
 
 class Game:
     """Main class for the application"""
 
     def __init__(self):
         # Creates the window
-        self.window = pygame.display.set_mode((1152, 776))
+        self.window = pygame.display.set_mode(SCREEN_SIZE)
 
     def run(self):
         """Main method, manages interaction between screens"""
