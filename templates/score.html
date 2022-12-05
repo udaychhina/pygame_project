@@ -5,7 +5,8 @@
 <p>Highest: {{ score_data.scores["highest"] }}</p>
 <p>Latest: {{ score_data.scores["latest"] }}</p>
 <h3>History</h3>
-<a href="/score-sorted">See scores sorted</a>
+<a href="/score-sorted">sorted</a>
+
 <table>
     <tr>
         <th>Date</th>
@@ -18,4 +19,6 @@
     </tr>
     {% endfor %}
 </table>
+
+<a href="/">Home</a>
 {% endblock %}
