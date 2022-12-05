@@ -1,20 +1,10 @@
-{{ extends base.html}}
+{% extends "base.html" %}
 
-{{ block content }}
-    <h1>Scores</h1>
-    <p>Highest: {{ score_data.scores["highest"] }}</p>
-    <p>Latest: {{ score_data.scores["latest"] }}</p>
-    <h3>History</h3>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Score</th>
-        </tr>
-        {% for date in score_data.scores["scores"] %}
-        <tr>
-            <td>{{ date.split()[0] }}</td>
-            <td>{{ score_data.scores["scores"][date] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-{{ endblock }}
+{% block content %}
+<h1>Welcome to CyberDroid Runner!</h1>
+
+<p>Click on the link below to see your most recent score.</p>
+<a href="/score">See your score</a>
+
+
+{% endblock %}
