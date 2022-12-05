@@ -1,4 +1,5 @@
 import pygame
+from components.score import Score
 
 
 class BaseScreen:
@@ -9,6 +10,7 @@ class BaseScreen:
         self.window = window
         # By default, there is no next screen (= game quits)
         self.next_screen = False
+        self.score = Score()
 
     def run(self):
         """

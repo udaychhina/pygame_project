@@ -5,7 +5,7 @@ from .base_screen import BaseScreen
 from components.player import Player
 from components.barrel import Barrel
 from components.flag import Flag
-from components.text_box import TextBox
+from components.money import Money
 
 from components.util import obstacle_timer
 
@@ -23,10 +23,9 @@ class GameScreen(BaseScreen):
 
         # Objects sprite group
         self.objects = pygame.sprite.Group()
-
         self.start_time = pygame.time.get_ticks()
 
-        self.score = 0
+        self.points = 0
 
     def draw(self):
         # Draw background
@@ -48,7 +47,7 @@ class GameScreen(BaseScreen):
         self.controls.get_rect(center=(SCREEN_SIZE[0]/2, 50))
         
         self.score_text = self.font.render(
-            f"SCORE: {self.score}", True, (255, 255, 255))
+            f"SCORE: {self.points}", True, (255, 255, 255))
         self.score_text.get_rect(center=(self.window.get_width() / 2, 200))
         
         self.window.blit(self.controls, (SCREEN_SIZE[0]/2 - self.controls.get_width()/2, 50))
@@ -62,19 +61,24 @@ class GameScreen(BaseScreen):
         self.character.update()
         self.objects.update()
 
-        self.score += 1
+        self.points += 1
 
         if pygame.sprite.spritecollide(self.character.sprite, self.objects, False):
             if self.character.sprite.dash_state == True and self.objects.sprites()[0].__class__.__name__ == "Flag":
                 destroy = self.objects.sprites()
                 destroy[0].kill()
-                print(destroy[0].__class__.__name__)
             elif self.character.sprite.dash_state == True and self.objects.sprites()[0].__class__.__name__ == "Barrel":
                 self.character.sprite.kill()
                 self.running = False
                 self.next_screen = "game_over"
+            elif self.objects.sprites()[0].__class__.__name__ == "Money":
+                self.points += 100
+                destroy = self.objects.sprites()
+                destroy[0].kill()
             else:
                 self.character.sprite.kill()
+                self.score.update(self.points)
+                self.score.save_score()
                 self.running = False
                 self.next_screen = "game_over"
 
@@ -89,4 +93,5 @@ class GameScreen(BaseScreen):
 
         if event.type == obstacle_timer:
             self.objects.add(random.choice(
-                [Barrel(), Barrel(), Barrel(), Flag()]))
+                [Barrel(), Barrel(), Barrel(), Flag(),
+                Barrel(), Barrel(), Barrel(), Flag(), Money()]))

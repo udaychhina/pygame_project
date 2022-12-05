@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIT 2515 Final Project</title>
+    <style>
+        table,
+        th,
+        td {
+            text-align: center;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Scores</h1>
+    <p>Highest: {{ score_data.scores["highest"] }}</p>
+    <p>Latest: {{ score_data.scores["latest"] }}</p>
+    <h3>History</h3>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Score</th>
+        </tr>
+        {% for date in score_data.scores["scores"] %}
+        <tr>
+            <td>{{ date.split()[0] }}</td>
+            <td>{{ score_data.scores["scores"][date] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
